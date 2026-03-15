@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plaza Parota — Manual de Nuevo Ingreso</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --negro: #0a0c0f;
+  --gris-oscuro: #13161b;
+  --gris-medio: #1e2229;
+  --gris-borde: #2c3140;
+  --blanco: #f0f2f5;
+  --blanco-suave: #c8cdd6;
+  --dorado: #c9a84c;
+  --dorado-claro: #e8c46a;
+  --rojo: #c0392b;
+  --rojo-claro: #e74c3c;
+  --verde: #27ae60;
+  --azul: #2980b9;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--negro);
+  color: var(--blanco);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  background: var(--gris-oscuro);
+  border-bottom: 3px solid var(--dorado);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 14px 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.shield {
+  width: 46px; height: 46px;
+  background: var(--dorado);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.shield svg { width: 22px; height: 22px; fill: var(--negro); }
+.header-plaza {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.7rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dorado); line-height: 1;
+}
+.header-sub {
+  font-size: 0.68rem; color: var(--blanco-suave);
+  letter-spacing: 0.16em; text-transform: uppercase; margin-top: 4px;
+}
+
+/* NAV */
+nav { background: var(--gris-medio); border-bottom: 1px solid var(--gris-borde); }
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 13px 18px;
+  background: none; border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--blanco-suave);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  transition: all 0.2s;
+}
+.tab:hover { color: var(--dorado); background: rgba(201,168,76,0.05); }
+.tab.active { color: var(--dorado); border-bottom-color: var(--dorado); background: rgba(201,168,76,0.08); }
+
+/* MAIN */
+main { max-width: 1100px; margin: 0 auto; padding: 34px 28px 80px; }
+.section { display: none; animation: fadeUp 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.sec-header {
+  display: flex; align-items: flex-end; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--gris-borde);
+}
+.sec-icon { font-size: 2.2rem; line-height: 1; }
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.06em; line-height: 1;
+}
+.sec-sub {
+  font-size: 0.7rem; color: var(--dorado);
+  letter-spacing: 0.16em; text-transform: uppercase; margin-top: 4px;
+}
+
+/* INICIO */
+.banner {
+  background: linear-gradient(135deg, var(--gris-oscuro) 0%, #191d24 100%);
+  border: 1px solid var(--gris-borde);
+  border-top: 4px solid var(--dorado);
+  border-radius: 4px; padding: 34px 38px; margin-bottom: 26px;
+  position: relative; overflow: hidden;
+}
+.banner::after {
+  content: '🛡'; position: absolute; right: 24px; top: 50%;
+  transform: translateY(-50%); font-size: 6rem; opacity: 0.07; pointer-events: none;
+}
+.banner h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;
+}
+.banner h2 span { color: var(--dorado); }
+.banner p { font-size: 0.87rem; color: var(--blanco-suave); line-height: 1.75; max-width: 580px; }
+
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+}
+.quick-card {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-radius: 4px; padding: 16px 18px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: border-color 0.2s, transform 0.2s;
+}
+.quick-card:hover { border-color: var(--dorado); transform: translateY(-2px); }
+.qc-icon { font-size: 1.5rem; flex-shrink: 0; }
+.qc-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--blanco-suave);
+}
+
+/* CONSIGNAS */
+.consigna-list { display: flex; flex-direction: column; gap: 11px; }
+.consigna-item {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-left: 4px solid var(--dorado); border-radius: 4px;
+  padding: 15px 20px; display: flex; align-items: flex-start; gap: 14px;
+  transition: transform 0.15s;
+}
+.consigna-item:hover { transform: translateX(3px); }
+.consigna-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 800;
+  color: var(--dorado); flex-shrink: 0; min-width: 26px;
+}
+.consigna-text { font-size: 0.87rem; color: var(--blanco-suave); line-height: 1.65; }
+.consigna-text strong { color: var(--blanco); font-weight: 600; }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 2px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-left: 8px; vertical-align: middle;
+}
+.badge-alert { background: rgba(192,57,43,0.2); color: #e74c3c; border: 1px solid rgba(192,57,43,0.4); }
+.badge-auth  { background: rgba(41,128,185,0.2); color: #5dade2; border: 1px solid rgba(41,128,185,0.3); }
+
+/* REGLAS */
+.col-block {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-radius: 4px; padding: 22px;
+}
+.col-block h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--gris-borde);
+  display: flex; align-items: center; gap: 8px;
+}
+.col-block.verde h3 { color: var(--verde); }
+.col-block.rojo  h3 { color: var(--rojo-claro); }
+
+.rule-list { display: flex; flex-direction: column; gap: 9px; list-style: none; }
+.rule-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.85rem; color: var(--blanco-suave); line-height: 1.6;
+  padding: 10px 12px; border-radius: 3px;
+}
+.col-block.verde .rule-list li { background: rgba(39,174,96,0.06); border: 1px solid rgba(39,174,96,0.15); }
+.col-block.rojo  .rule-list li { background: rgba(192,57,43,0.06); border: 1px solid rgba(192,57,43,0.15); }
+.rule-icon { flex-shrink: 0; font-size: 0.95rem; margin-top: 1px; }
+
+.alert-box {
+  border-radius: 4px; padding: 15px 18px; margin-top: 18px;
+  font-size: 0.84rem; display: flex; gap: 12px; align-items: flex-start;
+}
+.alert-box.danger {
+  background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.4); color: #e74c3c;
+}
+.alert-box .ai { font-size: 1.1rem; flex-shrink: 0; }
+.alert-box p { line-height: 1.6; }
+.alert-box strong { display: block; margin-bottom: 2px; }
+
+/* HORARIOS */
+.horario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+@media(max-width:600px) { .horario-grid { grid-template-columns: 1fr; } }
+
+.horario-card {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-radius: 4px; padding: 22px; margin-bottom: 0;
+}
+.horario-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--gris-borde); color: var(--dorado);
+}
+.turno-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid rgba(44,49,64,0.5);
+  font-size: 0.86rem;
+}
+.turno-item:last-child { border-bottom: none; }
+.turno-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-day   { background: var(--dorado); }
+.dot-night { background: var(--azul); }
+.turno-hora { color: var(--blanco); font-weight: 500; min-width: 120px; }
+.turno-label { color: var(--blanco-suave); font-size: 0.8rem; }
+
+.pago-box {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-left: 4px solid var(--verde); border-radius: 4px;
+  padding: 18px 22px; display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+}
+.pago-icon { font-size: 1.8rem; }
+.pago-info h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--verde); margin-bottom: 4px;
+}
+.pago-info p { font-size: 0.85rem; color: var(--blanco-suave); line-height: 1.6; }
+.pago-info strong { color: var(--blanco); }
+
+/* CLAVES */
+.claves-search-wrap { margin-bottom: 16px; position: relative; }
+.claves-search {
+  width: 100%; padding: 12px 16px 12px 42px;
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-radius: 4px; color: var(--blanco);
+  font-family: 'Barlow', sans-serif; font-size: 0.9rem;
+  outline: none; transition: border-color 0.2s;
+}
+.claves-search:focus { border-color: var(--dorado); }
+.claves-search::placeholder { color: #4a5060; }
+.search-icon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 1rem; color: #4a5060; pointer-events: none;
+}
+.nota-claves {
+  background: rgba(41,128,185,0.1); border: 1px solid rgba(41,128,185,0.3);
+  border-radius: 4px; padding: 12px 16px; margin-bottom: 18px;
+  font-size: 0.82rem; color: #5dade2; line-height: 1.6;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.claves-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 8px;
+}
+.clave-item {
+  background: var(--gris-oscuro); border: 1px solid var(--gris-borde);
+  border-radius: 3px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  transition: border-color 0.15s;
+}
+.clave-item:hover { border-color: var(--dorado); }
+.clave-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  color: var(--dorado); min-width: 30px; flex-shrink: 0;
+}
+.clave-nombre { font-size: 0.82rem; color: var(--blanco-suave); line-height: 1.3; }
+.clave-item.destacada { border-left: 3px solid var(--rojo-claro); }
+.clave-item.destacada .clave-num { color: var(--rojo-claro); }
+.no-result {
+  grid-column: 1/-1; text-align: center;
+  padding: 40px; color: #4a5060;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+footer {
+  background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
+  padding: 18px 28px; text-align: center;
+  font-size: 0.68rem; color: #3a4050;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+@media(max-width:600px) {
+  .header-plaza { font-size: 1.3rem; }
+  main { padding: 22px 16px 60px; }
+  .banner { padding: 24px 20px; }
+  .banner h2 { font-size: 1.4rem; }
+  .sec-title { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="shield">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+    </div>
+    <div>
+      <div class="header-plaza">Plaza Parota</div>
+      <div class="header-sub">Manual de Operaciones · Nuevo Ingreso · Seguridad &amp; Logística</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="tab active" onclick="showTab('inicio',this)">🏠 Inicio</button>
+    <button class="tab" onclick="showTab('consignas',this)">📋 Consignas</button>
+    <button class="tab" onclick="showTab('si',this)">✅ Qué Sí Hacer</button>
+    <button class="tab" onclick="showTab('no',this)">🚫 Qué NO Hacer</button>
+    <button class="tab" onclick="showTab('horarios',this)">🕐 Horarios</button>
+    <button class="tab" onclick="showTab('claves',this)">📡 Claves Operativas</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- INICIO -->
+  <div class="section active" id="inicio">
+    <div class="banner">
+      <h2>Bienvenido a <span>Plaza Parota</span></h2>
+      <p>Este manual contiene toda la información que necesitas para desempeñar tu trabajo con profesionalismo. Léelo con atención, conócelo de memoria y aplícalo en cada turno. Representas la imagen y la seguridad de esta plaza.</p>
+    </div>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="showTab('consignas', tabByName('consignas'))">
+        <span class="qc-icon">📋</span><span class="qc-label">Consignas del turno</span>
+      </div>
+      <div class="quick-card" onclick="showTab('si', tabByName('si'))">
+        <span class="qc-icon">✅</span><span class="qc-label">Qué sí debes hacer</span>
+      </div>
+      <div class="quick-card" onclick="showTab('no', tabByName('no'))">
+        <span class="qc-icon">🚫</span><span class="qc-label">Qué NO debes hacer</span>
+      </div>
+      <div class="quick-card" onclick="showTab('horarios', tabByName('horarios'))">
+        <span class="qc-icon">🕐</span><span class="qc-label">Horarios y pagos</span>
+      </div>
+      <div class="quick-card" onclick="showTab('claves', tabByName('claves'))">
+        <span class="qc-icon">📡</span><span class="qc-label">Claves operativas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSIGNAS -->
+  <div class="section" id="consignas">
+    <div class="sec-header">
+      <span class="sec-icon">📋</span>
+      <div>
+        <div class="sec-title">Consignas del Turno</div>
+        <div class="sec-sub">Obligaciones operativas diarias — Plaza Parota</div>
+      </div>
+    </div>
+    <div class="consigna-list">
+      <div class="consigna-item">
+        <span class="consigna-num">01</span>
+        <span class="consigna-text"><strong>Rondines cada hora:</strong> Tomar foto de los dos estacionamientos y subirlas al grupo de WhatsApp a partir de las 9:00 AM.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">02</span>
+        <span class="consigna-text"><strong>Recorrido matutino 7:30 AM:</strong> Iniciar desde el piso 5 hasta el piso 1, abrir terrazas y apagar luces.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">03</span>
+        <span class="consigna-text"><strong>Recorridos nocturnos:</strong> A partir de las 6:00 PM, cada hora hasta las 11:00 PM. Después, cada dos horas hasta las 6:00 AM.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">04</span>
+        <span class="consigna-text">
+          <strong>Registro de asistencia:</strong> Anotarse en la bitácora de asistencia <em>y</em> reportar en el grupo de WhatsApp al llegar y al salir.
+          <span class="badge badge-alert">⚠ Obligatorio</span><br><br>
+          Quien no lo haga se le pondrá falta.
+        </span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">05</span>
+        <span class="consigna-text"><strong>Cambio de turno:</strong> Reportar el número de llaves entregadas, radios y celular en cada cambio.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">06</span>
+        <span class="consigna-text"><strong>Foto de llaves:</strong> Tomar foto de llaves de cocina y barra, y reportar en cada cambio de turno.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">07</span>
+        <span class="consigna-text"><strong>Bitácora de novedades:</strong> Llenar con todos los recorridos realizados durante el turno, sin excepción.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">08</span>
+        <span class="consigna-text">
+          <strong>Gabinete CFE:</strong> Solo se puede abrir con autorización previa del administrador.
+          <span class="badge badge-auth">🔒 Requiere autorización</span>
+        </span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">09</span>
+        <span class="consigna-text">
+          <strong>Bodega de agua:</strong> Solo se puede abrir con autorización previa del administrador.
+          <span class="badge badge-auth">🔒 Requiere autorización</span>
+        </span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">10</span>
+        <span class="consigna-text"><strong>Terrazas:</strong> Abrir terraza curva y terraza plana del 3er piso según lo indicado en el turno.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">11</span>
+        <span class="consigna-text"><strong>Vialidad en estacionamientos:</strong> Colocar un elemento en cada estacionamiento para orientar a vehículos que intenten ocupar lugares no autorizados.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">12</span>
+        <span class="consigna-text"><strong>Motos:</strong> Indicar a los motociclistas que se dirijan a su lugar designado.</span>
+      </div>
+      <div class="consigna-item">
+        <span class="consigna-num">13</span>
+        <span class="consigna-text">
+          <strong>Obras de remodelación en locales:</strong> Verificar que los trabajos inicien a partir de las 10:00 AM y cuenten con autorización previa.
+          <span class="badge badge-auth">🔒 Requiere autorización</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SÍ HACER -->
+  <div class="section" id="si">
+    <div class="sec-header">
+      <span class="sec-icon">✅</span>
+      <div>
+        <div class="sec-title">Qué Sí Debes Hacer</div>
+        <div class="sec-sub">Conducta y actitud requerida del personal de seguridad</div>
+      </div>
+    </div>
+    <div class="col-block verde">
+      <h3>✅ Comportamiento requerido</h3>
+      <ul class="rule-list">
+        <li><span class="rule-icon">🤝</span> Tener empatía con todo el personal y visitantes de la plaza.</li>
+        <li><span class="rule-icon">👋</span> Saludar a los oficinistas y al público en general.</li>
+        <li><span class="rule-icon">⏰</span> Llegar puntualmente a tu horario establecido.</li>
+        <li><span class="rule-icon">👔</span> Portar el uniforme completo durante todo el turno.</li>
+        <li><span class="rule-icon">📝</span> Llenar correctamente la bitácora de novedades en cada turno.</li>
+        <li><span class="rule-icon">📸</span> Tomar y subir las fotos de los estacionamientos en el horario indicado.</li>
+        <li><span class="rule-icon">📱</span> Reportar en el grupo de WhatsApp tu entrada y salida.</li>
+        <li><span class="rule-icon">🔑</span> Entregar llaves, radios y celular correctamente en cada cambio de turno.</li>
+        <li><span class="rule-icon">🚶</span> Realizar los recorridos completos en los horarios establecidos.</li>
+        <li><span class="rule-icon">🛡</span> Mantener una actitud profesional y seria en todo momento.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- NO HACER -->
+  <div class="section" id="no">
+    <div class="sec-header">
+      <span class="sec-icon">🚫</span>
+      <div>
+        <div class="sec-title">Qué NO Debes Hacer</div>
+        <div class="sec-sub">Conductas prohibidas — pueden resultar en acta administrativa o afectar tu bono</div>
+      </div>
+    </div>
+    <div class="col-block rojo">
+      <h3>🚫 Conductas prohibidas</h3>
+      <ul class="rule-list">
+        <li><span class="rule-icon">🍱</span> Tomar comida ajena del refrigerador. Quien sea sorprendido será acreedor a un acta administrativa y se verá afectado su bono.</li>
+        <li><span class="rule-icon">😴</span> Dormir durante el turno, bajo ninguna circunstancia.</li>
+        <li><span class="rule-icon">⚔️</span> Tener conflictos con el personal de limpieza y mantenimiento.</li>
+        <li><span class="rule-icon">🪑</span> Sentarse en horas pico.</li>
+        <li><span class="rule-icon">🚬</span> Fumar frente al Estacionamiento 1.</li>
+        <li><span class="rule-icon">📦</span> Recibir paquetes de los locales sin autorización.</li>
+      </ul>
+    </div>
+    <div class="alert-box danger">
+      <span class="ai">⚠️</span>
+      <p><strong>Aviso importante</strong>El incumplimiento de estas normas puede derivar en acta administrativa, descuento de bono o baja definitiva del servicio.</p>
+    </div>
+  </div>
+
+  <!-- HORARIOS -->
+  <div class="section" id="horarios">
+    <div class="sec-header">
+      <span class="sec-icon">🕐</span>
+      <div>
+        <div class="sec-title">Horarios y Pagos</div>
+        <div class="sec-sub">Turnos, recorridos y días de nómina — Plaza Parota</div>
+      </div>
+    </div>
+
+    <div class="horario-grid">
+      <div class="horario-card">
+        <h3>☀️ Turno Matutino</h3>
+        <div class="turno-item">
+          <div class="turno-dot dot-day"></div>
+          <span class="turno-hora">6:00 AM – 6:00 PM</span>
+          <span class="turno-label">Opción A</span>
+        </div>
+        <div class="turno-item">
+          <div class="turno-dot dot-day"></div>
+          <span class="turno-hora">7:00 AM – 7:00 PM</span>
+          <span class="turno-label">Opción B</span>
+        </div>
+      </div>
+      <div class="horario-card">
+        <h3>🌙 Turno Nocturno</h3>
+        <div class="turno-item">
+          <div class="turno-dot dot-night"></div>
+          <span class="turno-hora">6:00 PM – 6:00 AM</span>
+          <span class="turno-label">Opción A</span>
+        </div>
+        <div class="turno-item">
+          <div class="turno-dot dot-night"></div>
+          <span class="turno-hora">7:00 PM – 7:00 AM</span>
+          <span class="turno-label">Opción B</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="horario-card" style="margin-bottom:18px;">
+      <h3>🔄 Frecuencia de recorridos nocturnos</h3>
+      <div class="turno-item">
+        <div class="turno-dot dot-night"></div>
+        <span class="turno-hora">6:00 PM – 11:00 PM</span>
+        <span class="turno-label">Recorrido cada hora</span>
+      </div>
+      <div class="turno-item">
+        <div class="turno-dot dot-night"></div>
+        <span class="turno-hora">11:00 PM – 6:00 AM</span>
+        <span class="turno-label">Recorrido cada dos horas</span>
+      </div>
+    </div>
+
+    <div class="pago-box">
+      <span class="pago-icon">💰</span>
+      <div class="pago-info">
+        <h4>Días de pago de nómina</h4>
+        <p>Los pagos se realizan los días <strong>1 y 16 de cada mes</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pago-box" style="margin-top:14px; border-left-color: var(--dorado);">
+      <span class="pago-icon">⚡</span>
+      <div class="pago-info">
+        <h4>Doblete</h4>
+        <p>Quien realice un doblete de turno recibirá el pago <strong>el mismo día</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAVES -->
+  <div class="section" id="claves">
+    <div class="sec-header">
+      <span class="sec-icon">📡</span>
+      <div>
+        <div class="sec-title">Claves Operativas</div>
+        <div class="sec-sub">Código de comunicación de radio — uso exclusivo del personal</div>
+      </div>
+    </div>
+
+    <div class="claves-search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="claves-search" type="text" id="buscarClave" placeholder="Buscar por número o nombre de clave..." oninput="filtrarClaves()">
+    </div>
+
+    <div class="nota-claves">
+      <span>ℹ️</span>
+      <span><strong>Notas especiales —</strong> Clave 102 Agua: "P" = Potable / "N" = Negras &nbsp;·&nbsp; Clave 128 Pipa: "A" = Agua / "D" = Diésel / "G.L.P." = Gas L.P. &nbsp;·&nbsp; Las claves en rojo indican situación de emergencia o riesgo.</span>
+    </div>
+
+    <div class="claves-grid" id="clavesGrid"></div>
+  </div>
+
+</main>
+
+<footer>Plaza Parota · Manual de Operaciones · Documento de uso interno — Personal de Seguridad y Logística</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+function tabByName(id) {
+  return document.querySelector(`.tab[onclick*="'${id}'"]`);
+}
+
+const claves = [
+  {n:"01",t:"Abandonado"},{n:"02",t:"Abastecer Combustible"},{n:"03",t:"Accidente"},
+  {n:"04",t:"Acuartelamiento"},{n:"05",t:"Afirmativo"},{n:"06",t:"Agente del Ministerio Público"},
+  {n:"07",t:"Agresión"},{n:"08",t:"Alerta",d:true},{n:"09",t:"Alimentos"},
+  {n:"10",t:"Ambulancia"},{n:"11",t:"Apoyo"},{n:"12",t:"Arma Blanca",d:true},
+  {n:"13",t:"Arma De Fuego",d:true},{n:"14",t:"Artefacto Explosivo",d:true},{n:"15",t:"Asalto",d:true},
+  {n:"16",t:"Auxilio"},{n:"17",t:"Banco"},{n:"18",t:"Base"},
+  {n:"19",t:"Bomberos"},{n:"20",t:"Canino o Camino"},{n:"21",t:"Casa Jalisco"},
+  {n:"22",t:"Central"},{n:"23",t:"Central Camionera"},{n:"24",t:"Códigos"},
+  {n:"25",t:"Comparecencia"},{n:"26",t:"Conductor"},{n:"27",t:"Convoy"},
+  {n:"28",t:"Correctivo Disciplinario"},{n:"29",t:"Choque"},{n:"30",t:"Descompostura"},
+  {n:"31",t:"Detenido"},{n:"32",t:"Dirigirse A"},{n:"33",t:"Documento"},
+  {n:"34",t:"Domicilio"},{n:"35",t:"Droga",d:true},{n:"36",t:"Ebrio"},
+  {n:"37",t:"Enfrentamiento",d:true},{n:"38",t:"Enterado"},{n:"39",t:"Equipo"},
+  {n:"40",t:"Escolta"},{n:"41",t:"Escuela"},{n:"42",t:"Estudiante"},
+  {n:"43",t:"Explosión",d:true},{n:"44",t:"Fotografía"},{n:"45",t:"Fuera de Servicio"},
+  {n:"46",t:"Fuga"},{n:"47",t:"Grafiti"},{n:"56",t:"Investigación"},
+  {n:"57",t:"Lesionado o Herido",d:true},{n:"58",t:"Lugar Indicado"},{n:"59",t:"Llamada General"},
+  {n:"60",t:"Neumático Ponchado"},{n:"61",t:"Manifestación"},{n:"62",t:"Mecánico"},
+  {n:"63",t:"Menor"},{n:"64",t:"Misión Cumplida"},{n:"65",t:"Módulo"},
+  {n:"66",t:"Motín",d:true},{n:"67",t:"Negativo"},{n:"68",t:"Novedad"},
+  {n:"69",t:"Occiso",d:true},{n:"70",t:"Orden"},{n:"71",t:"Palacio de Gobierno"},
+  {n:"72",t:"Pandilla"},{n:"73",t:"Peloteros"},{n:"74",t:"Penal o Reclusorio"},
+  {n:"75",t:"Persecución"},{n:"76",t:"Persona"},{n:"77",t:"Placas"},
+  {n:"78",t:"Policía"},{n:"79",t:"Prensa"},{n:"80",t:"Presidencia"},
+  {n:"81",t:"Propaganda"},{n:"82",t:"Prostituta"},{n:"83",t:"Radio"},
+  {n:"84",t:"Repetir Mensaje"},{n:"85",t:"Retirarse"},{n:"86",t:"Riña",d:true},
+  {n:"87",t:"Robo",d:true},{n:"88",t:"Secuestro",d:true},{n:"89",t:"Semáforo"},
+  {n:"90",t:"Servicio"},{n:"91",t:"Sin Efecto"},{n:"92",t:"Sin Novedad"},
+  {n:"93",t:"Sospechoso"},{n:"94",t:"Teléfono"},{n:"95",t:"Traslado"},
+  {n:"96",t:"Ubicación"},{n:"97",t:"Urgente",d:true},{n:"98",t:"Vehículo"},
+  {n:"99",t:"Vigilancia"},{n:"100",t:"Baño"},{n:"101",t:"Aeropuerto"},
+  {n:"102",t:"Agua  (P=Potable / N=Negras)"},{n:"111",t:"Confidencial"},
+  {n:"112",t:"Congestionamiento"},{n:"113",t:"Damnificados"},{n:"114",t:"Departamento Jurídico"},
+  {n:"115",t:"Derrame"},{n:"116",t:"Derrumbe"},{n:"117",t:"Desbordamiento"},
+  {n:"118",t:"Detector de"},{n:"119",t:"Electrocutado",d:true},{n:"120",t:"Enfermo"},
+  {n:"121",t:"Entrevista"},{n:"122",t:"Evacuación"},{n:"123",t:"Hundimiento"},
+  {n:"124",t:"Infarto",d:true},{n:"125",t:"Paramédico"},{n:"126",t:"Parrilla"},
+  {n:"127",t:"Perdido o Extraviado"},{n:"128",t:"Pipa  (A=Agua / D=Diésel / GLP=Gas)"},{n:"129",t:"Prensado"},
+  {n:"130",t:"Rescate",d:true},{n:"131",t:"Retén"},{n:"132",t:"Señalamiento"},
+  {n:"133",t:"Tapadera"},{n:"134",t:"Turista"},{n:"135",t:"Volcadura",d:true},
+  {n:"136",t:"Academia de Policía"},{n:"137",t:"A Criterio"},{n:"138",t:"Ajustador de Seguros"},
+  {n:"139",t:"A la Escucha"},{n:"140",t:"Alcoholemia"},{n:"141",t:"Cochera"},
+  {n:"142",t:"Corte de Circulación"},{n:"143",t:"Depósito de Vehículos"},{n:"144",t:"Disponible"},
+  {n:"145",t:"Elemento de Corporación"},{n:"146",t:"Estacionamiento"},{n:"147",t:"Exceso de Velocidad"},
+  {n:"148",t:"Guardia"},{n:"149",t:"Informe"},{n:"150",t:"Jefatura"},
+  {n:"151",t:"Mal Estacionado"},{n:"152",t:"Minibús, Microbús u Ómnibus"},
+  {n:"153",t:"Palabras de Agradecimiento"},{n:"154",t:"Par Vial"},{n:"155",t:"Pasar Alto de Semáforo"}
+];
+
+function renderClaves(lista) {
+  const grid = document.getElementById('clavesGrid');
+  if (!lista.length) {
+    grid.innerHTML = '<div class="no-result">No se encontraron claves</div>';
+    return;
+  }
+  grid.innerHTML = lista.map(c => `
+    <div class="clave-item${c.d?' destacada':''}">
+      <span class="clave-num">${c.n}</span>
+      <span class="clave-nombre">${c.t}</span>
+    </div>`).join('');
+}
+
+function filtrarClaves() {
+  const q = document.getElementById('buscarClave').value.toLowerCase().trim();
+  renderClaves(q ? claves.filter(c => c.n.includes(q) || c.t.toLowerCase().includes(q)) : claves);
+}
+
+renderClaves(claves);
+</script>
+</body>
+</html>
